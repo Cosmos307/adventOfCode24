@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var count int
+// var count int
 
 func Solution() {
 
@@ -19,7 +19,7 @@ func Solution() {
 	var err2 error
 	var value1 int
 	var value2 int
-	count = 1
+	// count = 1
 	filename := "day1/input.txt"
 	file, err := os.Open(filename)
 	if err != nil {
@@ -44,7 +44,8 @@ func Solution() {
 		log.Fatalf("Lists do not have the same amount of integers")
 	}
 
-	fmt.Println(recMatchsmallest(List1, List2))
+	fmt.Println("Solution Part2", countDouble(List1, List2))
+	fmt.Println("Solution Part1", recMatchsmallest(List1, List2))
 }
 
 func recMatchsmallest(List1 []int, List2 []int) int {
@@ -75,7 +76,7 @@ func recMatchsmallest(List1 []int, List2 []int) int {
 		}
 	}
 	// fmt.Printf("%d,     List 1: %d      List2: %d      Distance:%d   \n", count, minValue1, minValue2, getDifference(minValue1, minValue2))
-	count++
+	// count++
 	List1 = append(List1[:minIndex1], List1[minIndex1+1:]...)
 	List2 = append(List2[:minIndex2], List2[minIndex2+1:]...)
 
@@ -90,4 +91,19 @@ func getDifference(value1 int, value2 int) int {
 	} else {
 		return value1 - value2
 	}
+}
+
+func countDouble(list1 []int, list2 []int) int {
+	var doubles int
+
+	for i := range list1 {
+		numberCount := 0
+		for j := range list2 {
+			if list1[i] == list2[j] {
+				numberCount++
+			}
+		}
+		doubles += list1[i] * numberCount
+	}
+	return doubles
 }
